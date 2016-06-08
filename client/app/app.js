@@ -2,7 +2,7 @@
 
 angular.module('exploreAroundApp', ['exploreAroundApp.auth', 'exploreAroundApp.admin',
     'exploreAroundApp.constants', 'ngCookies', 'ngResource', 'ngSanitize', 'btford.socket-io',
-    'ui.router', 'ui.bootstrap', 'validation.match'
+    'ui.router', 'ui.bootstrap', 'validation.match', 'google.places'
   ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');

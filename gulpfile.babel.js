@@ -4,7 +4,6 @@
 import _ from 'lodash';
 import del from 'del';
 import gulp from 'gulp';
-import grunt from 'grunt';
 import path from 'path';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import http from 'http';
@@ -111,18 +110,6 @@ function sortModulesFirst(a, b) {
 /********************
  * Reusable pipelines
  ********************/
-
-let lintClientScripts = lazypipe()
-    .pipe(plugins.jshint, `${clientPath}/.jshintrc`)
-    .pipe(plugins.jshint.reporter, 'jshint-stylish');
-
-let lintServerScripts = lazypipe()
-    .pipe(plugins.jshint, `${serverPath}/.jshintrc`)
-    .pipe(plugins.jshint.reporter, 'jshint-stylish');
-
-let lintServerTestScripts = lazypipe()
-    .pipe(plugins.jshint, `${serverPath}/.jshintrc-spec`)
-    .pipe(plugins.jshint.reporter, 'jshint-stylish');
 
 let styles = lazypipe()
     .pipe(plugins.sourcemaps.init)
@@ -255,22 +242,26 @@ gulp.task('lint:scripts:client', () => {
         _.map(paths.client.test, blob => '!' + blob),
         [`!${clientPath}/app/app.constant.js`]
     ))
-        .pipe(lintClientScripts());
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.format());;
 });
 
 gulp.task('lint:scripts:server', () => {
     return gulp.src(_.union(paths.server.scripts, _.map(paths.server.test, blob => '!' + blob)))
-        .pipe(lintServerScripts());
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.format());
 });
 
 gulp.task('lint:scripts:clientTest', () => {
     return gulp.src(paths.client.test)
-        .pipe(lintClientScripts());
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.format());;
 });
 
 gulp.task('lint:scripts:serverTest', () => {
     return gulp.src(paths.server.test)
-        .pipe(lintServerTestScripts());
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.format());;
 });
 
 gulp.task('jscs', () => {
@@ -339,7 +330,8 @@ gulp.task('watch', () => {
 
     plugins.watch(_.union(paths.server.scripts, testFiles))
         .pipe(plugins.plumber())
-        .pipe(lintServerScripts())
+        .pipe(plugins.eslint())
+        .pipe(plugins.eslint.format())
         .pipe(plugins.livereload());
 
     gulp.watch('bower.json', ['wiredep:client']);
@@ -606,49 +598,4 @@ gulp.task('test:e2e', ['env:all', 'env:test', 'start:server', 'webdriver_update'
         }).on('end', () => {
             process.exit();
         });
-});
-
-/********************
- * Grunt ported tasks
- ********************/
-
-grunt.initConfig({
-    buildcontrol: {
-        options: {
-            dir: paths.dist,
-            commit: true,
-            push: true,
-            connectCommits: false,
-            message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
-        },
-        heroku: {
-            options: {
-                remote: 'heroku',
-                branch: 'master'
-            }
-        },
-        openshift: {
-            options: {
-                remote: 'openshift',
-                branch: 'master'
-            }
-        }
-    }
-});
-
-grunt.loadNpmTasks('grunt-build-control');
-
-gulp.task('buildcontrol:heroku', function(done) {
-    grunt.tasks(
-        ['buildcontrol:heroku'],    //you can add more grunt tasks in this array
-        {gruntfile: false}, //don't look for a Gruntfile - there is none. :-)
-        function() {done();}
-    );
-});
-gulp.task('buildcontrol:openshift', function(done) {
-    grunt.tasks(
-        ['buildcontrol:openshift'],    //you can add more grunt tasks in this array
-        {gruntfile: false}, //don't look for a Gruntfile - there is none. :-)
-        function() {done();}
-    );
 });

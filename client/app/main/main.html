@@ -1,28 +1,36 @@
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
+  <div class="jumbotron">
+    <h1>Explore places around you without effort</h1>
+  </div>
   </div>
 </header>
 
 <div class="container">
+
+  <div class="row">
+    <p class="lead">Find the next place to visit</p>
+    <p class="input-group">
+      <input type="text" class="form-control" g-places-autocomplete ng-model="main.newPlace" placeholder="What you you looking for?">
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary" ng-click="main.addPlace()">Add New</button>
+      </span>
+    </p>
+  </div>
+
+  <!--Map of the place you currenctly in-->
+  <div class="row">
+    <div id="map" style="height: 400px; weight: 400px"></div>
+  </div>
+
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
-        <li><a href="#" uib-tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="$ctrl.deleteThing(thing)">&times;</button></a></li>
+      <h1 class="page-header">Top Places near you:</h1>
+      <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="place in main.topPlaces">
+        <li><a href="#" uib-tooltip="{{place.info}}">{{place.name}}<button type="button" class="close" ng-click="$ctrl.deleteThing(place)">&times;</button></a></li>
       </ul>
     </div>
   </div>
+  <div class="clearfix"></div>
 
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="$ctrl.newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="$ctrl.addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
 </div>

@@ -1,0 +1,27 @@
+{
+  "extends": "angular",
+  "plugins": ["angular"],
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "node": true
+  },
+  "globals": {
+    "angular": true,
+    "module": true,
+    "inject": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "strict": 0,
+    "semi": [0, 'never'],
+    "angular/log": 0,
+    "angular/document-service": 0,
+    "space-in-parens": 0,
+    "space-before-function-paren": 0,
+    "no-extra-semi": 0
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}
