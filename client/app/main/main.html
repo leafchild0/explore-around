@@ -1,36 +1,51 @@
 <header class="hero-unit" id="banner">
-  <div class="container">
-  <div class="jumbotron">
-    <h1>Explore places around you without effort</h1>
-  </div>
-  </div>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Explore places around you without effort</h1>
+        </div>
+    </div>
 </header>
 
 <div class="container">
 
-  <div class="row">
-    <p class="lead">Find the next place to visit</p>
-    <p class="input-group">
-      <input type="text" class="form-control" g-places-autocomplete ng-model="main.newPlace" placeholder="What you you looking for?">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="main.addPlace()">Add New</button>
-      </span>
-    </p>
-  </div>
-
-  <!--Map of the place you currenctly in-->
-  <div class="row">
-    <div id="map" style="height: 400px; weight: 400px"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Top Places near you:</h1>
-      <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="place in main.topPlaces">
-        <li><a href="#" uib-tooltip="{{place.info}}">{{place.name}}<button type="button" class="close" ng-click="$ctrl.deleteThing(place)">&times;</button></a></li>
-      </ul>
+    <div class="row">
+        <p class="lead">Find the next place to visit</p>
+        <p class="input-group">
+            <input type="text" class="form-control" g-places-autocomplete ng-model="main.newPlace" placeholder="What you you looking for?">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary" ng-click="main.changePlace()">Change Place</button>
+            </span>
+        </p>
     </div>
-  </div>
-  <div class="clearfix"></div>
+
+    <!--Map of the place you currenctly in-->
+    <div class="row">
+        <div id="map" style="height: 400px; weight: 400px"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Top Places near you:</h1>
+            <ul class="media-list" ng-repeat="place in main.popularPlaces">
+<!--                <li>
+                    <a ui-sref="details({ id: place.place_id })">{{place.name}}</a>
+                    <div class="row">
+                        <img ng-src="{{main.getFirstPhoto(place.photos)}}">
+                    </div>
+                </li>-->
+                <div class="media">
+                    <div class="media-left">
+                        <a ui-sref="details({ id: place.place_id })">
+                            <img class="media-object" ng-src="{{main.getFirstPhoto(place.photos)}}" alt="place.name">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{place.name}}</h4>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 
 </div>

@@ -1,42 +1,54 @@
 <div class="container">
 
-  <div class="row">
-    <p class="lead">{{ $ctrl.place.title }}</p>
-  </div>
-  <!--Return button, save button-->
-
-  <div class="row">
-    <div id="placeMap" style="height: 400px; weight: 400px"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12">
-      <p class="lead">Photos</p>
-      <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="photo in $ctrl.place.photos">
-        <img src="{{photo.src}}" alt="{{photo.alt}}">
-      </ul>
+    <div class="row">
+        <p class="lead">{{ details.place.name }}</p>
     </div>
-  </div>
-  <div class="clearfix"></div>
+    <!--Return button, save button-->
 
-  <div class="row">
-    <div class="col-lg-12">
-      <p class="lead">Description</p>
-      <p class="well" ng-model="$ctrl.place.description"></p>
+    <div class="row">
+        <div id="placeMap" style="height: 400px; weight: 400px"></div>
     </div>
-  </div>
-  <div class="clearfix"></div>
-  <hr>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <p class="lead">Comments</p>
-      <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="comment in $ctrl.place.comments">
-        <li><span>{{comment.author}}</span>
-        <p class="">{{comment.body}}</p></li>
-      </ul>
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="lead">Place Photos</p>
+            <div class="row">
+                <div ng-repeat="photo in details.place.photos">
+                    <div class="col-lg-4">
+                        <img class="img-thumbnail img-responsive" ng-src="{{photo.getUrl({'maxWidth': 200, 'maxHeight': 100})}}">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="clearfix"></div>
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="lead">Adress</p>
+            <p>{{details.place.formatted_address}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="lead">Phone</p>
+            <p>{{details.place.international_phone_number || '-'}}</p>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <p class="lead">Comments</p>
+            <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="comment in details.place.comments">
+                <li>
+                    <span>{{comment.author}}</span>
+                    <p class="">{{comment.body}}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="clearfix"></div>
 
 </div>
