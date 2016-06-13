@@ -12,6 +12,7 @@ angular.module('exploreAroundApp')
         url: '/logout?referrer',
         referrer: 'main',
         template: '',
+        controllerAs: 'vm',
         controller: function($state, Auth) {
           var referrer = $state.params.referrer || $state.current.referrer || 'main';
           Auth.logout();

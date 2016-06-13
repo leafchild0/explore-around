@@ -8,6 +8,6 @@
 		"admin"
 	]
 })
-
+.constant("baseURL", "http://localhost:9000/")
 ;
 })(angular);

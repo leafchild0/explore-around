@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="row">
-        <p class="page-header">My List of Places</p>
+        <h3 class="page-header">My List of Places</h3>
     </div>
     <!--Return button, save button-->
 
@@ -12,23 +12,13 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
-            <ul class="media-list" ng-repeat="place in saved.userPlaces | filter:saved.search">
-                <li class="media">
-                    <!--<div class="media-left">
-                        <a ui-sref="details({ id: place.place_id })">
-                            <img class="media-object" ng-src="{{saved.placesService.getFirstPhoto(place.photos)}}">
-                        </a>
-                    </div>-->
-                    <div class="media-body">
-                        <a ui-sref="details({ id: place.place_id })">
-                        <h4 class="media-heading">{{place.name}}</h4></a>
-                        <a class="btn btn-danger" ng-click="saved.deletePlace(place.place_id)"><span class="pull-right">&times;</span></a>
-                    </div>
-                </li>
-            </ul>
+        <div class="list-group" ng-repeat="place in saved.userPlaces | filter:saved.search">
+            <div class="list-group-item nounderline">
+                <a ui-sref="details({ id: place.place_id })">
+                    {{place.name}}
+                </a>
+                <button type="button" class="removeBtn btn btn-xs btn-primary pull-right" ng-click="saved.deletePlace(place, $index)">&times;
+                </button>
         </div>
-    </div>
-    <div class="clearfix"></div>
 
-</div>
+    </div>

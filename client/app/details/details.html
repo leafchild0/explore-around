@@ -1,13 +1,13 @@
 <div class="container">
 
     <div class="row">
-        <p class="lead">{{ details.place.name }}</p>
+        <h3 class="page-header">{{ details.place.name }}</h3>
     </div>
 
     <!--Return button, save button-->
     <div class="row">
         <a class="btn btn-default btn-sm pull-left" ui-sref="main">Back</a>
-        <a class="btn btn-success btn-sm pull-right" ng-click="details.savePlace(details.place)">Save</a>
+        <a class="btn btn-success btn-sm pull-right" ng-show="details.Auth.isLoggedIn()" ng-click="details.savePlace(details.place)">Save</a>
     </div>
 
     <div class="row">
