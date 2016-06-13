@@ -5,9 +5,7 @@ angular.module('exploreAroundApp')
         // AngularJS will instantiate a singleton by calling "new" on this function
 
         var maps = {};
-
         maps.userPosition = {};
-
         maps.searchOptions = {
             location: '',
             radius: 50000,
@@ -25,7 +23,7 @@ angular.module('exploreAroundApp')
             maps.infoWindow = new google.maps.InfoWindow({
                 map: maps.map
             });
-        }
+        };
 
         maps.handleLocationError = function(browserHasGeolocation, pos) {
             maps.infoWindow.setPosition(pos);
@@ -33,41 +31,40 @@ angular.module('exploreAroundApp')
                 'Error: The Geolocation service failed.' :
                 'Error: Your browser doesn\'t support geolocation.' +
                 'Try to find your place manually');
-        }
+        };
 
         maps.createMarker = function(place, color) {
 
-            let location = place.geometry ? place.geometry.location : place;
-            let marker = new google.maps.Marker({
+            let location = place.geometry ? {
+              lat: place.geometry.location.lat(),
+              lng: place.geometry.location.lng()
+            } : place;
+            return new google.maps.Marker({
                 map: maps.map,
                 position: location,
                 icon: 'http://www.google.com/intl/en_us/mapfiles/ms/micons/' + color + '-dot.png'
             });
-        }
+        };
 
         maps.setupMap = function(message, zoom) {
             maps.infoWindow.setPosition(maps.userPosition);
             maps.map.setCenter(maps.userPosition);
             maps.infoWindow.setContent(message);
             maps.map.setZoom(zoom);
-
-        }
-
-
+        };
+  
         maps.setUserPosition = function(pos) {
             maps.userPosition = pos;
             maps.searchOptions.location = pos;
-        }
+        };
 
         maps.getUserPosition = function() {
             return maps.userPosition;
-        }
+        };
 
         maps.drawUserPosition = function() {
             maps.createMarker(maps.userPosition, 'red');
-        }
-
-
+        };
 
         return maps;
 

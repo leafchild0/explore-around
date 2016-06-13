@@ -20,7 +20,7 @@
 
     <!--Map of the place you currenctly in-->
     <div class="row">
-        <div id="map" style="height: 400px; weight: 400px"></div>
+        <div id="map" style="height:400px"></div>
     </div>
 
     <div class="row">
@@ -36,7 +36,7 @@
                 <div class="media">
                     <div class="media-left">
                         <a ui-sref="details({ id: place.place_id })">
-                            <img class="media-object" ng-src="{{main.getFirstPhoto(place.photos)}}" alt="place.name">
+                            <img class="media-object" ng-src="{{main.placesService.getFirstPhoto(place.photos)}}" alt="{{place.name}}">
                         </a>
                     </div>
                     <div class="media-body">

@@ -23,7 +23,6 @@
             $scope.$on('$destroy', function () {
                 socket.unsyncUpdates('saved');
             });
-
         }
 
         $onInit() {
@@ -70,13 +69,6 @@
                         this.scope.$digest();
                     });
                 });
-            });
-        }
-
-        getFirstPhoto(photos) {
-            return photos.slice(0, 4)[0].getUrl({
-                'maxWidth': 200,
-                'maxHeight': 100
             });
         }
 

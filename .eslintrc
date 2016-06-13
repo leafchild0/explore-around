@@ -14,7 +14,7 @@
   "parser": "babel-eslint",
   "rules": {
     "strict": 0,
-    "semi": [0, 'never'],
+    "semi": [0, "never"],
     "angular/log": 0,
     "angular/document-service": 0,
     "space-in-parens": 0,
