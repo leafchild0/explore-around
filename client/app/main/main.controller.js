@@ -50,11 +50,6 @@
 
         }
 
-        $onChanges( changedObj ) {
-            //console.log(changedObj);
-
-        }
-
         getPopularPlaces() {
             this.popularPlaces = [];
 
