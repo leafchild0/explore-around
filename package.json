@@ -110,8 +110,8 @@
     "wiredep": "^2.2.2"
   },
   "engines": {
-    "node": "^4.4.0",
-    "npm": "^2.14.20"
+    "node": "^5.10.x",
+    "npm": "^3.8.x"
   },
   "scripts": {
     "test": "gulp test",
